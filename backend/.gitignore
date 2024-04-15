@@ -1,0 +1,4 @@
+/node_modules
+.env
+/fyersAuth
+/helpers/NSE_CM_SCRIPS.json
