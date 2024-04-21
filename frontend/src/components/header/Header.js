@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 
 
-const pages = ['Dashboard', 'Orders', 'Positions', 'Account', 'Tools','Learn','Taxes'];
+const pages = ['Dashboard', 'Orders', 'Positions', 'Account', 'Tools','Learn','Taxes','watchlist'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,7 +36,8 @@ function Header() {
       account: '/account',
       tools: '/tools',
       learn: '/learn',
-      taxes: '/taxes'
+      taxes: '/taxes',
+      watchlist: '/watchlist'
     };
 
     const pagePath = pages[page.toLowerCase()];

@@ -1,3 +1,147 @@
+// import React, { useEffect, useState } from 'react';
+// import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+// import TableCell from '@mui/material/TableCell';
+// import TableContainer from '@mui/material/TableContainer';
+// import TableHead from '@mui/material/TableHead';
+// import TableRow from '@mui/material/TableRow';
+// import Paper from '@mui/material/Paper';
+// import axios from 'axios';
+// import Loading from '../loading/Loading';
+// import { Button } from '@mui/material';
+
+// function createData(qty, price, productType, priceType, symbol,orderType,createdAt) {
+//   return { qty, price, productType, priceType, symbol,orderType,createdAt };
+// }
+
+// export default function OrdersTable({ status, refresh, setRefresh }) {
+//   // State for orders, loading status, and modal visibility
+//   const [orders, setOrders] = useState([]);
+//   const [loading, setLoading] = useState(false);
+
+//   // Function to fetch orders from the server
+//   const getOrders = async () => {
+//     const userId = JSON.parse(localStorage.getItem('cmUser')).userid;
+//     setLoading(true);
+//     try {
+//       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/order/all?userId=${userId}&status=${status}`);
+//       if (response.status === 200) {
+//         setLoading(false);
+//         setRefresh(false);
+//         const allOrders = response.data.orders.map((order) =>
+//           createData(order.qty, order.price, order.productType, order.priceType, order.symbol,order.orderType,order.createdAt)
+//         );
+//         setOrders(allOrders);
+//         // console.log(allOrders);
+//       }
+//     } catch (err) {
+//       console.log(err);
+//       alert("Something went wrong");
+//     }
+//   };
+
+//   // Function to handle opening the sell modal
+//   const handleSellStock = async (order) => {
+    // const user_quantity = prompt("ENTER THE QUANTITY");
+    // if(order.qty>= user_quantity){
+    //   order.qty -= user_quantity;
+    //   if (user_quantity !== null && !isNaN(user_quantity) && user_quantity.trim() !== "") {
+    //     const sellData = {
+    //       symbol: order.symbol,
+    //       orderType: 'Sell',
+    //       priceType: 'market',
+    //       productType: 'Delivery',
+    //       qty: parseInt(user_quantity),
+    //       price: order.price, // Use order.price instead of price
+    //       userId: 'naBsR0p2vW', // Replace with actual user ID
+    //       stockPrice: order.price, // Use order.price instead of price
+    //     };
+    //     try {
+    //       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/stock/sell`, sellData);
+  
+    //       if (response.data.success) {
+    //         alert(response.data.data.message);
+    //         // Additional logic if needed
+    //       } else {
+    //         alert('Failed to place sell order');
+    //       }
+    //     } catch (error) {
+    //       console.error('Error selling stock:', error.message);
+    //       alert('Error selling stock. Please try again.');
+    //     }
+    //   } else {
+    //     alert("Please enter a valid quantity.");
+    //   }
+    // }
+    // else{
+    //   alert("Please enter the Valid Number of Quantity");
+    // }
+//   };
+
+//   // Fetch orders on component mount
+//   useEffect(() => {
+//     getOrders();
+//   }, []);
+
+//   // Fetch orders when refresh flag changes
+//   useEffect(() => {
+//     if (refresh) getOrders();
+//   }, [refresh]);
+
+//   return (
+//     <TableContainer component={Paper}>
+//       <Table sx={{ minWidth: 650 }} aria-label="simple table">
+//         <TableHead>
+//           <TableRow>
+//             <TableCell>Symbol</TableCell>
+//             <TableCell>Qty</TableCell>
+//             <TableCell align="right">Price</TableCell>
+//             <TableCell align="right">Total Price</TableCell>
+//             <TableCell align='right'>Taxes</TableCell>
+//             <TableCell align="right">Product Type</TableCell>
+//             <TableCell align="right">Price Type</TableCell>
+//             <TableCell align="right">Order Type</TableCell>
+//             <TableCell align="right">Order Date</TableCell>
+//             <TableCell align="right">Sell</TableCell>
+//           </TableRow>
+//         </TableHead>
+//         <TableBody>
+//           {loading ? (
+//             <Loading />
+//           ) : orders.length > 0 ? (
+//             orders.map((order, index) => (
+//               <TableRow key={index}>
+//                 <TableCell>{order.symbol}</TableCell>
+//                 <TableCell>{order.qty}</TableCell>
+//                 <TableCell align="right">{order.price}</TableCell>
+//                 <TableCell align="right">{(order.price * order.qty).toFixed(3)}</TableCell>
+//                 <TableCell align="right">{((13.5+0.18*order.price*order.qty*0.0000345+0.001*order.price*order.qty+0.0000345*order.price*order.qty+0.18*order.price*order.qty*0.0000345+10/10000000*order.price*order.qty+0.00015*order.price*order.qty).toFixed(2))}</TableCell>
+//                 <TableCell align="right">{order.productType}</TableCell>
+//                 <TableCell align="right">{order.priceType}</TableCell>
+//                 <TableCell align="right">{order.orderType}</TableCell>
+//                 <TableCell align="right">{new Date(order.createdAt).toISOString().substring(0, 10)}</TableCell>
+//                 <TableCell>
+//   <Button onClick={() => handleSellStock(order)} style={{ color: 'white', backgroundColor: '#D43725' }}>
+//     {order.orderType === 'Sell' ? 'Buy' : 'Sell'}
+//   </Button>
+// </TableCell>
+//               </TableRow>
+//             ))
+            
+//           ) : (
+//             <TableRow>
+//               <TableCell colSpan={4} align="center">
+//                 No orders
+//               </TableCell>
+//             </TableRow>
+//           )}
+//         </TableBody>
+//       </Table>
+//     </TableContainer>
+//   );
+// }
+
+
 import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,20 +152,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import Loading from '../loading/Loading';
-import { Typography } from '@mui/material';
+import { Button } from '@mui/material';
 
-function createData(orderId, time, symbol, exchange, orderType, qty, avg, tradeType, lmType, status) {
-
-  let date = new Date(time);
-  time = date.getHours() + ':' + (date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()) + ':' + date.getSeconds();
-  orderType = orderType.toUpperCase();
-  status = status.toUpperCase();
-
-  return { orderId, time, symbol, exchange, orderType, qty, avg, tradeType, lmType, status };
+function createData(qty, price, productType, priceType, symbol, orderType, createdAt) {
+  return { qty, price, productType, priceType, symbol, orderType, createdAt };
 }
 
 export default function OrdersTable({ status, refresh, setRefresh }) {
-
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -33,28 +170,53 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
       if (response.status === 200) {
         setLoading(false);
         setRefresh(false);
-        let allOrders = [];
-        response.data.orders.map((order) => {
-          allOrders.push(createData(
-            order._id,
-            order.createdAt,
-            order.scripId.symbol,
-            order.scripId.exchange,
-            order.orderType,
-            order.qty,
-            order.price,
-            order.productType,
-            order.priceType,
-            order.orderStatus
-          ));
-        });
+        const allOrders = response.data.orders.map((order) =>
+          createData(order.qty, order.price, order.productType, order.priceType, order.symbol, order.orderType, order.createdAt)
+        );
         setOrders(allOrders);
       }
     } catch (err) {
       console.log(err);
       alert("Something went wrong");
     }
-  }
+  };
+
+  const handleBuySell = async (order, action) => {
+    const user_quantity = prompt("ENTER THE QUANTITY");
+    if(order.qty>= user_quantity){
+      order.qty -= user_quantity;
+      if (user_quantity !== null && !isNaN(user_quantity) && user_quantity.trim() !== "") {
+        const sellData = {
+          symbol: order.symbol,
+          orderType: 'Sell',
+          priceType: 'market',
+          productType: 'Delivery',
+          qty: parseInt(user_quantity),
+          price: order.price, // Use order.price instead of price
+          userId: 'naBsR0p2vW', // Replace with actual user ID
+          stockPrice: order.price, // Use order.price instead of price
+        };
+        try {
+          const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/stock/sell`, sellData);
+  
+          if (response.data.success) {
+            // alert(response.data.data.message);
+            alert(`${order.orderType} Placed Successfully`);
+          } else {
+            alert(`Failed to place ${order.orderType} order`);
+          }
+        } catch (error) {
+          console.error('Error selling stock:', error.message);
+          alert('Error selling stock. Please try again.');
+        }
+      } else {
+        alert("Please enter a valid quantity.");
+      }
+    }
+    else{
+      alert("Please enter the Valid Number of Quantity");
+    }
+  };
 
   useEffect(() => {
     getOrders();
@@ -69,68 +231,47 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Time</TableCell>
-            <TableCell align="right">Order type</TableCell>
-            <TableCell align="right">Symbol</TableCell>
-            <TableCell align="right">Exchange</TableCell>
-            <TableCell align="right">Qty</TableCell>
-            <TableCell align="right">Avg</TableCell>
-            <TableCell align="right">Product type</TableCell>
-            <TableCell align="right">Price type</TableCell>
-            <TableCell align="right">Status</TableCell>
+            <TableCell>Symbol</TableCell>
+            <TableCell>Qty</TableCell>
+            <TableCell align="right">Price</TableCell>
+            <TableCell align="right">Total Price</TableCell>
+            <TableCell align='right'>Taxes</TableCell>
+            <TableCell align="right">Product Type</TableCell>
+            <TableCell align="right">Price Type</TableCell>
+            <TableCell align="right">Order Type</TableCell>
+            <TableCell align="right">Order Date</TableCell>
+            <TableCell align="right">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {
-            loading ?
-              <Loading /> :
-              orders.length > 0 ?
-                orders.map((order) => (
-                  <TableRow
-                    key={order.orderId}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {order.time}
-                    </TableCell>
-                    <TableCell align="left">
-                      <Typography sx={{
-                        background: order.orderType.toLowerCase() === 'buy' ? '#5a55ff20' : '#d4372520',
-                        color: order.orderType.toLowerCase() === 'buy' ? '#5a55ff' : '#d43725',
-                        textAlign: 'center',
-                        borderRadius: '5px',
-                        fontSize: '0.9rem',
-                        padding: '0.2rem 0.5rem'
-                      }} >{order.orderType}</Typography>
-                    </TableCell>
-                    <TableCell align="right">{order.symbol}</TableCell>
-                    <TableCell align="right">{order.exchange}</TableCell>
-                    <TableCell sx={{
-                      color: order.orderType.toLowerCase() === 'buy' ? '#5a55ff' : '#d43725'
-                    }} align="right">{order.qty}</TableCell>
-                    <TableCell align="right">{order.avg}</TableCell>
-                    <TableCell align="right">{order.tradeType}</TableCell>
-                    <TableCell align="right">{order.lmType}</TableCell>
-                    <TableCell align="left">
-                      <Typography sx={{
-                        background: order.status.toLowerCase() === 'executed' ? '#23d16020' : '#d4372520',
-                        color: order.status.toLowerCase() === 'executed' ? '#23d160' : '#d43725',
-                        textAlign: 'center',
-                        borderRadius: '5px',
-                        fontSize: '0.9rem',
-                        padding: '0.2rem 0.5rem'
-                      }} >{order.status}</Typography>
-                    </TableCell>
-                  </TableRow>
-                )) :
-                <TableRow
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    No orders
-                  </TableCell>
-                </TableRow>
-          }
+          {loading ? (
+            <Loading />
+          ) : orders.length > 0 ? (
+            orders.map((order, index) => (
+              <TableRow key={index}>
+                <TableCell>{order.symbol}</TableCell>
+                <TableCell>{order.qty}</TableCell>
+                <TableCell align="right">{order.price}</TableCell>
+                <TableCell align="right">{(order.price * order.qty).toFixed(3)}</TableCell>
+                <TableCell align="right">{((13.5 + 0.18 * order.price * order.qty * 0.0000345 + 0.001 * order.price * order.qty + 0.0000345 * order.price * order.qty + 0.18 * order.price * order.qty * 0.0000345 + 10 / 10000000 * order.price * order.qty + 0.00015 * order.price * order.qty).toFixed(2))}</TableCell>
+                <TableCell align="right">{order.productType}</TableCell>
+                <TableCell align="right">{order.priceType}</TableCell>
+                <TableCell align="right">{order.orderType}</TableCell>
+                <TableCell align="right">{new Date(order.createdAt).toISOString().substring(0, 10)}</TableCell>
+                <TableCell>
+                  <Button onClick={() => handleBuySell(order, order.orderType === 'Sell' ? 'Buy' : 'Sell')} style={{ color: 'white', backgroundColor: '#D43725' }}>
+                    {order.orderType === 'Sell' ? 'Buy' : 'Sell'}
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={4} align="center">
+                No orders
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </TableContainer>

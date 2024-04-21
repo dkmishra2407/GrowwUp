@@ -1,170 +1,3 @@
-
-// const Order = require("../../models/Order");
-// const mongoose = require("mongoose");
-// const User = require("../../models/User");
-// const Scrip = require("../../models/Scrip");
-// const Position = require("../../models/Position");
-// const ObjectId = mongoose.Types.ObjectId;
-
-// module.exports.buy_stock = async (req, res) => {
-//     try {
-//         const {
-//             // stockId,
-//             orderType,
-//             priceType,
-//             productType,
-//             qty,
-//             price,
-//             userId,
-//             stockPrice
-//         } = req.body;
-
-//         let avgPrice = parseFloat(price);
-
-//         let validPrice = (avgPrice * 100) % 5;
-//         if (validPrice) {
-//             return res.status(400).json({
-//                 status: 400,
-//                 message: "Invalid price"
-//             });
-//         }
-
-//         const user = await User.findOne({ _id: ObjectId(userId) });
-//         let leverage = 5;
-//         let margin = leverage * user.availableFunds;
-
-//         const scrip = await Scrip.findOne({ _id: stockId });
-//         avgPrice = avgPrice === 0 ? stockPrice : avgPrice;
-
-//         const userOrder = new Order({
-//             userId: userId,
-//             // scripId: stockId,
-//             qty: qty,
-//             price: avgPrice,
-//             orderType: orderType,
-//             productType: productType,
-//             priceType: priceType,
-//             orderStatus: priceType.toLowerCase() === 'market' ? 'Executed' : 'Pending',
-//             isAvgPrice: avgPrice >= stockPrice ? 'Greater' : 'Less'
-//         });
-//         const order = await userOrder.save();
-
-//         if (margin < avgPrice * qty) {
-//             await Order.findOne({ _id: order._id }, { orderStatus: 'Rejected' });
-//             return res.status(400).json({
-//                 status: 400,
-//                 message: "Insufficient fund"
-//             });
-//         }
-
-//         await User.findOneAndUpdate({ _id: userId }, {
-//             availableFunds: user.availableFunds - ((qty * avgPrice) / leverage)
-//         });
-
-//         const newPosition = new Position({
-//             userId: userId,
-//             buyOrderId: order._id,
-//             sellOrderId: order._id,
-//             qty: qty,
-//             posStatus: 'Active'
-//         });
-
-//         await newPosition.save();
-
-//         return res.status(200).json({
-//             success: true,
-//             data: {
-//                 message: 'Buy order placed successfully!!'
-//             }
-//         })
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({
-//             status: 500,
-//             messages: err.message
-//         })
-//     }
-// }
-
-// module.exports.sell_stock = async (req, res) => {
-//     try {
-//         const {
-//             orderType,
-//             priceType,
-//             productType,
-//             qty,
-//             price,
-//             userId,
-//             stockPrice
-//         } = req.body;
-
-//         let avgPrice = parseFloat(price);
-
-//         let validPrice = (avgPrice * 100) % 5;
-//         if (validPrice) {
-//             return res.status(400).json({
-//                 status: 400,
-//                 message: "Invalid price"
-//             });
-//         }
-
-//         const user = await User.findOne({ _id: ObjectId(userId) });
-
-//         let leverage = 5;
-//         let margin = leverage * user.availableFunds;
-//         avgPrice = avgPrice === 0 ? stockPrice : avgPrice;
-
-//         const userOrder = new Order({
-//             userId: userId,
-//             // scripId: stockId,
-//             qty: qty,
-//             price: avgPrice,
-//             orderType: orderType,
-//             productType: productType,
-//             priceType: priceType,
-//             orderStatus: priceType.toLowerCase() === 'market' ? 'Executed' : 'Pending',
-//             isAvgPrice: avgPrice >= stockPrice ? 'Greater' : 'Less'
-//         });
-//         const order = await userOrder.save();
-
-//         if (margin < avgPrice * qty) {
-//             await Order.findOne({ _id: order._id }, { orderStatus: 'Rejected' });
-//             return res.status(400).json({
-//                 status: 400,
-//                 message: "Insufficient fund"
-//             });
-//         }
-
-//         await User.findOneAndUpdate({ _id: userId }, {
-//             availableFunds: user.availableFunds - ((qty * avgPrice) / leverage)
-//         });
-
-//         const newPosition = new Position({
-//             userId: userId,
-//             buyOrderId: order._id,
-//             sellOrderId: order._id,
-//             qty: qty,
-//             posStatus: 'Active'
-//         });
-
-//         await newPosition.save();
-
-//         return res.status(200).json({
-//             success: true,
-//             data: {
-//                 message: 'Sell order placed successfully!!'
-//             }
-//         })
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({
-//             status: 500,
-//             messages: err.message
-//         })
-//     }
-//}
-
-
 const Order = require("../../models/Order");
 const User = require("../../models/User");
 const Scrip = require("../../models/Scrip");
@@ -172,19 +5,19 @@ const Position = require("../../models/Position");
 const mongoose = require("mongoose");
 
 module.exports.buy_stock = async (req, res) => {
-    try {
-        const { orderType, priceType, productType, qty, price, userId } = req.body;
+try{
+        const { orderType, priceType, productType, qty, price, userId , symbol } = req.body;
         const avgPrice = parseFloat(price);
-
-        // Validate the price
-        if (avgPrice % 0.05 !== 0) {
-            return res.status(400).json({
-                status: 400,
-                message: "Invalid price. Price must be a multiple of 0.05."
-            });
-        }
-
-        const user = await User.findById(userId);
+    
+        // // Validate the price
+        // if (avgPrice % 0.05 !== 0) {
+        //     return res.status(400).json({
+        //         status: 400,
+        //         message: "Invalid price. Price must be a multiple of 0.05."
+        //     });
+        // }
+    
+        const user = await User.findById("661e6d453e3da0b8f29d040e");
         if (!user) {
             return res.status(400).json({
                 status: 400,
@@ -192,22 +25,26 @@ module.exports.buy_stock = async (req, res) => {
             });
         }
 
+        // console.log(user);
+    
         const orderStatus = priceType.toLowerCase() === 'market' ? 'Executed' : 'Pending';
-        const isAvgPrice = avgPrice >= stockPrice ? 'Greater' : 'Less';
-
+        // const isAvgPrice = avgPrice >= stockPrice ? 'Greater' : 'Less';
+    
         const newOrder = new Order({
             userId,
+            orderStatus,
+            symbol,
             qty,
-            price: avgPrice,
+            price,
             orderType,
             productType,
             priceType,
-            orderStatus,
-            isAvgPrice
         });
 
-        const savedOrder = await newOrder.save();
 
+        const savedOrder = await newOrder.save();
+        // console.log(savedOrder);
+    
         // Update user funds
         const leverage = 5;
         const margin = leverage * user.availableFunds;
@@ -218,11 +55,13 @@ module.exports.buy_stock = async (req, res) => {
                 message: "Insufficient fund"
             });
         }
-
+    
         user.availableFunds -= (qty * avgPrice) / leverage;
         await user.save();
-
+    
         const newPosition = new Position({
+            symbol,
+            price,
             userId,
             buyOrderId: savedOrder._id,
             sellOrderId: savedOrder._id,
@@ -230,12 +69,16 @@ module.exports.buy_stock = async (req, res) => {
             posStatus: 'Active'
         });
 
+        // console.log(newPosition);
+    
         await newPosition.save();
-
+    
         return res.status(200).json({
             success: true,
             data: {
-                message: 'Buy order placed successfully!!'
+                message: 'Buy order placed successfully!!',
+                order: savedOrder, // Include the saved order information in the response
+                user: user // Include updated user information in the response
             }
         });
     } catch (err) {
@@ -245,12 +88,77 @@ module.exports.buy_stock = async (req, res) => {
             message: 'Error creating buy order. Please try again.'
         });
     }
+    
+
 };
 
 module.exports.sell_stock = async (req, res) => {
     try {
-        // Similar logic as buy_stock function with appropriate changes for selling
-        // Implement the logic for selling stocks here
+        const { orderType, priceType, productType, qty, price, userId , symbol } = req.body;
+        console.log(req.body);
+        const avgPrice = parseFloat(price);
+    
+        // // Validate the price
+        // if (avgPrice % 0.05 !== 0) {
+        //     return res.status(400).json({
+        //         status: 400,
+        //         message: "Invalid price. Price must be a multiple of 0.05."
+        //     });
+        // }
+    
+        const user = await User.findById("661e6d453e3da0b8f29d040e");
+        if (!user) {
+            return res.status(400).json({
+                status: 400,
+                message: "User not found."
+            });
+        }
+
+        console.log(user);
+    
+        const orderStatus = priceType.toLowerCase() === 'market' ? 'Executed' : 'Pending';
+        // const isAvgPrice = avgPrice >= stockPrice ? 'Greater' : 'Less';
+    
+        const newOrder = new Order({
+            userId,
+            orderStatus,
+            symbol,
+            qty,
+            price,
+            orderType,
+            productType,
+            priceType,
+        });
+
+
+        const savedOrder = await newOrder.save();
+        // console.log(savedOrder);
+    
+        // Update user funds
+        
+    
+        user.availableFunds += (qty * avgPrice);
+        await user.save();
+    
+        const newPosition = new Position({
+            userId,
+            buyOrderId: savedOrder._id,
+            sellOrderId: savedOrder._id,
+            qty,
+            posStatus: 'Active'
+        });
+
+    
+        await newPosition.save();
+    
+        return res.status(200).json({
+            success: true,
+            data: {
+                message: 'Sell order placed successfully!!',
+                order: savedOrder, // Include the saved order information in the response
+                user: user // Include updated user information in the response
+            }
+        });
     } catch (err) {
         console.error('Error creating sell order:', err);
         res.status(500).json({
@@ -262,53 +170,3 @@ module.exports.sell_stock = async (req, res) => {
 
 
 
-// const express = require('express');
-// const router = express.Router();
-// const Order = require('../../models/Order');
-
-// module.exports.buy_stock = async (req, res) => {
-//   try {
-//     const {
-//       userId,
-//       scripId,
-//       qty,
-//       price,
-//       isAvgPrice,
-//       orderType,
-//       productType,
-//       priceType,
-//       orderStatus,
-//       isExitOrder,
-//     } = req.body;
-
-//     // Create a new order using the Order model
-//     const newOrder = new Order({
-//       userId,
-//       scripId,
-//       qty,
-//       price,
-//       isAvgPrice,
-//       orderType,
-//       productType,
-//       priceType,
-//       orderStatus,
-//       isExitOrder,
-//     });
-
-//     // Save the new order to the database
-//     const savedOrder = await newOrder.save();
-
-//     res.status(201).json({
-//       success: true,
-//       data: savedOrder,
-//     });
-//   } catch (error) {
-//     console.error('Error creating order:', error);
-//     res.status(500).json({
-//       success: false,
-//       message: 'Error creating order. Please try again.',
-//     });
-//   }
-// };
-
-// module.exports = router;

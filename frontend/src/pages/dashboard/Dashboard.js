@@ -139,14 +139,211 @@
 //   );
 // }
 
+// import React, { useEffect, useState } from 'react';
+// import Box from '@mui/material/Box';
+// import axios from 'axios';
+// import { Button, Typography, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
+// import RefreshIcon from '@mui/icons-material/Refresh';
+
+// export default function Dashboard() {
+//   const [data, setData] = useState(null);
+//   const [mydata , setMarketStatus ] = setMarketStatus(null);
+//   const [refreshGL, setRefreshGL] = useState(false);
+
+//   const fetchData = async () => {
+//     try {
+//       const response = await axios.get('http://127.0.0.1:8001/');
+//       setData(response.data); // Set the data received from the API
+//     } catch (error) {
+//       console.log("Error:", error);
+//     }
+//   };
+
+//   const fetchmarketData = async () => {
+//     try {
+//       const response = await axios.get('http://127.0.0.1:8002/');
+//       setMarketStatus(response.data); // Set the data received from the API
+//     } catch (error) {
+//       console.log("Error:", error);
+//     }
+//   };
+
+
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+//   // const handleRefreshGainerLosers = async () => {
+//   //   setRefreshGL(true);
+//   //   // Perform refresh logic here
+//   //   setTimeout(() => {
+//   //     setRefreshGL(false);
+//   //   }, 2000); // Simulating refresh with a delay
+//   // }
+
+//   return (
+//     <Box sx={{ flexGrow: 1, padding: 2 }}>
+//       <Box mt={3} display="flex" alignItems="center">
+//         {/* <Typography variant="h5">Top Gainers and Losers</Typography>
+//         <Button
+//           variant="contained"
+//           color="primary"
+//           startIcon={<RefreshIcon />}
+//           // onClick={handleRefreshGainerLosers}
+//           disabled={refreshGL}
+//           sx={{ ml: 2 }}
+//         >
+//           {refreshGL ? 'Refreshing...' : 'Refresh'}
+//         </Button> */}
+
+// <Typography variant="h4" align="center">Market Holidays</Typography>
+//       <Table>
+//         <TableHead>
+//           <TableRow>
+//             <TableCell align="right">MARKET TYPE</TableCell>
+//             <TableCell align="right">Status</TableCell>
+//             <TableCell align="right">DATE</TableCell>
+//             <TableCell align="right">Index</TableCell>
+//           </TableRow>
+//         </TableHead>
+//         <TableBody>
+//           {mydata && mydata.map((item, index) => (
+//             <TableRow key={index}>
+//               <TableCell align="right">{item.market}</TableCell>
+//               <TableCell align="right">{item.marketStatus}</TableCell>
+//               <TableCell align="right">{item.tradeDate}</TableCell>
+//               <TableCell align="right">{item.index}</TableCell>
+//             </TableRow>
+//           ))}
+//         </TableBody>
+//       </Table>
+
+// {/* [{'market': 'Capital Market', 'marketStatus': 'Close', 'tradeDate': '19-Apr-2024 15:30', 'index': 'NIFTY 50', 'last': 22147, 'variation': 151.15000000000146, 'percentChange': 0.69, 'marketStatusMessage': 'Market is Closed'}, {'market': 'Currency', 'marketStatus': 'Close', 'tradeDate': 'Invalid date', 'index': '', 'last': '', 'variation': '', 'percentChange': '', 'marketStatusMessage': 'Market is Closed'}, {'market': 'Commodity', 'marketStatus': 'Close', 'tradeDate': 'Invalid date', 'index': '', 'last': '', 'variation': '', 'percentChange': '', 'marketStatusMessage': 'Market is Closed'}, {'market': 'Debt', 'marketStatus': 'Close', 'tradeDate': 'Invalid date', 'index': '', 'last': '', 'variation': '', 'percentChange': '', 'marketStatusMessage': 'Market is Closed'}, {'market': 'currencyfuture', 'marketStatus': 'Close', 'tradeDate': 'Invalid date', 'index': '', 'last': '83.4850', 'variation': '', 'percentChange': '', 'marketStatusMessage': 'Market is Closed', 'expiryDate': '26-Apr-2024', 'underlying': 'USDINR', 'updated_time': '19-Apr-2024 17:00', 'tradeDateFormatted': '19-Apr-2024 17:00', 'slickclass': 'slick-item'}] */}
+//       </Box>
+//       {/* Include additional components or logic for top gainers/losers here */}
+//       <Typography variant="h4" align="center">Market Holidays</Typography>
+//       <Table>
+//         <TableHead>
+//           <TableRow>
+//             <TableCell align="right">MARKET TYPE</TableCell>
+//             <TableCell align="right">HOLIDAYS</TableCell>
+//             <TableCell align="right">DATE</TableCell>
+//             <TableCell align="right">DAY</TableCell>
+//           </TableRow>
+//         </TableHead>
+//         <TableBody>
+//           {data && data.map((item, index) => (
+//             <TableRow key={index}>
+//               <TableCell align="right">{item.Product}</TableCell>
+//               <TableCell align="right">{item.description}</TableCell>
+//               <TableCell align="right">{item.tradingDate}</TableCell>
+//               <TableCell align="right">{item.weekDay}</TableCell>
+//             </TableRow>
+//           ))}
+//         </TableBody>
+//       </Table>
+//     </Box>
+//   );
+// }
+
+
+// import React, { useEffect, useState } from 'react';
+// import Box from '@mui/material/Box';
+// import axios from 'axios';
+// import { Typography, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
+
+// export default function Dashboard() {
+//   const [data, setData] = useState(null);
+//   const [mydata, setMyData] = useState(null);
+//   const [refreshGL, setRefreshGL] = useState(false);
+
+//   const fetchData = async () => {
+//     try {
+//       const response = await axios.get('http://127.0.0.1:8001/');
+//       setData(response.data); // Set the data received from the API
+//     } catch (error) {
+//       console.log("Error:", error);
+//     }
+//   };
+
+//   const fetchMarketData = async () => {
+//     try {
+//       const response = await axios.get('http://127.0.0.1:8002/');
+//       setMyData(response.data); // Set the data received from the API
+//     } catch (error) {
+//       console.log("Error:", error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchData();
+//     fetchMarketData(); // Call fetchMarketData to get market status data
+//   }, []);
+
+//   return (
+//     <Box sx={{ flexGrow: 1, padding: 2 }}>
+//       <Typography variant="h4" align="center">Market Status</Typography>
+//       <Table>
+//         <TableHead>
+//           <TableRow>
+//             <TableCell align="right">MARKET TYPE</TableCell>
+//             <TableCell align="right">Status</TableCell>
+//             <TableCell align="right">DATE</TableCell>
+//             <TableCell align="right">Index</TableCell>
+//             <TableCell align="right">Price</TableCell>
+//             <TableCell align="right">Change</TableCell>
+//             <TableCell align="right">Change (%)</TableCell>
+//           </TableRow>
+//         </TableHead>
+//         <TableBody>
+//           {mydata && mydata.map((item, index) => (
+//             <TableRow key={index}>
+//               <TableCell align="right">{item.market}</TableCell>
+//               <TableCell align="right"  style={{ color: item.marketStatus === "Close" ? 'red' : 'green' }}>{item.marketStatus}</TableCell>
+//               <TableCell align="right">{item.tradeDate}</TableCell>
+//               <TableCell align="right">{item.index}</TableCell>
+//               <TableCell align="right">{item.last}</TableCell>
+//               <TableCell align="right" style={{ color: item.variation < 0 ? 'red' : 'green' }}>{item.variation}</TableCell>
+//               <TableCell align="right" style={{ color: item.percentChange < 0 ? 'red' : 'green' }}>{item.percentChange}</TableCell>
+//             </TableRow>
+//           ))}
+//         </TableBody>
+//       </Table>
+
+//       <Typography variant="h4" align="center">Market Holidays</Typography>
+//       <Table>
+//         <TableHead>
+//           <TableRow>
+//             <TableCell align="right">MARKET TYPE</TableCell>
+//             <TableCell align="right">HOLIDAYS</TableCell>
+//             <TableCell align="right">DATE</TableCell>
+//             <TableCell align="right">DAY</TableCell>
+//           </TableRow>
+//         </TableHead>
+//         <TableBody>
+//           {data && data.map((item, index) => (
+//             <TableRow key={index}>
+//               <TableCell align="right">{item.Product}</TableCell>
+//               <TableCell align="right">{item.description}</TableCell>
+//               <TableCell align="right">{item.tradingDate}</TableCell>
+//               <TableCell align="right">{item.weekDay}</TableCell>
+//             </TableRow>
+//           ))}
+//         </TableBody>
+//       </Table>
+//     </Box>
+//   );
+// }
+
+
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import { Button, Typography, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
-import RefreshIcon from '@mui/icons-material/Refresh';
+import { Typography, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 
 export default function Dashboard() {
   const [data, setData] = useState(null);
+  const [mydata, setMyData] = useState(null);
   const [refreshGL, setRefreshGL] = useState(false);
 
   const fetchData = async () => {
@@ -158,11 +355,10 @@ export default function Dashboard() {
     }
   };
 
-  const fetchGainers = async () => {
+  const fetchMarketData = async () => {
     try {
-      const response = await axios.get('https://www.nseindia.com/api/live-analysis-variations?index=loosers');
-      console.log(response.data);
-      setData(response.data); // Set the data received from the API
+      const response = await axios.get('http://127.0.0.1:8002/');
+      setMyData(response.data); // Set the data received from the API
     } catch (error) {
       console.log("Error:", error);
     }
@@ -170,54 +366,64 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchData();
-    fetchGainers();
+    fetchMarketData(); // Call fetchMarketData to get market status data
   }, []);
-
-  const handleRefreshGainerLosers = async () => {
-    setRefreshGL(true);
-    // Perform refresh logic here
-    setTimeout(() => {
-      setRefreshGL(false);
-    }, 2000); // Simulating refresh with a delay
-  }
 
   return (
     <Box sx={{ flexGrow: 1, padding: 2 }}>
-      <Box mt={3} display="flex" alignItems="center">
-        <Typography variant="h5">Top Gainers and Losers</Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<RefreshIcon />}
-          onClick={handleRefreshGainerLosers}
-          disabled={refreshGL}
-          sx={{ ml: 2 }}
-        >
-          {refreshGL ? 'Refreshing...' : 'Refresh'}
-        </Button>
-      </Box>
-      {/* Include additional components or logic for top gainers/losers here */}
-      <Typography variant="h4" align="center">Market Holidays</Typography>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">MARKET TYPE</TableCell>
-            <TableCell align="right">HOLIDAYS</TableCell>
-            <TableCell align="right">DATE</TableCell>
-            <TableCell align="right">DAY</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data && data.map((item, index) => (
-            <TableRow key={index}>
-              <TableCell align="right">{item.Product}</TableCell>
-              <TableCell align="right">{item.description}</TableCell>
-              <TableCell align="right">{item.tradingDate}</TableCell>
-              <TableCell align="right">{item.weekDay}</TableCell>
+      <Box mb={2}>
+        <Typography variant="h4" align="center">Market Status</Typography>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="right">MARKET TYPE</TableCell>
+              <TableCell align="right">Status</TableCell>
+              <TableCell align="right">DATE</TableCell>
+              <TableCell align="right">Index</TableCell>
+              <TableCell align="right">Price</TableCell>
+              <TableCell align="right">Change</TableCell>
+              <TableCell align="right">Change (%)</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {mydata && mydata.map((item, index) => (
+              <TableRow key={index}>
+                <TableCell align="right">{item.market}</TableCell>
+                <TableCell align="right" style={{ color: item.marketStatus === "Close" ? 'red' : 'green' }}>{item.marketStatus}</TableCell>
+                <TableCell align="right">{item.tradeDate}</TableCell>
+                <TableCell align="right">{item.index}</TableCell>
+                <TableCell align="right">{item.last}</TableCell>
+                <TableCell align="right" style={{ color: item.variation < 0 ? 'red' : 'green' }}>{item.variation}</TableCell>
+                <TableCell align="right" style={{ color: item.percentChange < 0 ? 'red' : 'green' }}>{item.percentChange}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
+
+      <Box mb={2}>
+        <Typography variant="h4" align="center">Market Holidays</Typography>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">MARKET TYPE</TableCell>
+              <TableCell align="center">HOLIDAYS</TableCell>
+              <TableCell align="center">DATE</TableCell>
+              <TableCell align="center">DAY</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data && data.map((item, index) => (
+              <TableRow key={index}>
+                <TableCell align="center">{item.Product}</TableCell>
+                <TableCell align="center">{item.description}</TableCell>
+                <TableCell align="center">{item.tradingDate}</TableCell>
+                <TableCell align="center">{item.weekDay}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
     </Box>
   );
 }

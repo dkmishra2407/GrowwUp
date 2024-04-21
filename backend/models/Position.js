@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 
 const PositionModel = new mongoose.Schema({
+    symbol:{
+        type: String,
+        required: true,
+    },
+    price:{
+        type: String,
+        required: true,
+    },
     userId: {
         type: String,
         required: true,

@@ -17,8 +17,9 @@ import Tools from "./pages/tools/Tools";
 import TradingChart from "./pages/tradingChart/TradingChart";
 import Learn from "./learn/Learn";
 import Taxes from "./pages/taxes/Taxes";
-import Web1 from "./learn/learning_pages/Web";
-
+import Web1 from "./learn/learning_pages/Web1";
+import Web2 from "./learn/learning_pages/Web2";
+import MyWatchlist from "./pages/mywatchlist/MyWatchlist"
 function App() {
   return (
     <div className="App">
@@ -34,7 +35,9 @@ function App() {
             <Route path="/chart" element={<TradingChart />} />
             <Route path="/learn" element={<Learn />} />
             <Route path="/taxes" element={<Taxes />} />
-            <Route path="/learn/learning_pages/Web" element={<Web1 />} />
+            <Route path="/watchlist" element={<MyWatchlist />}/>
+            <Route path="/learn/learning_pages/Web1" element={<Web1 />} />
+            <Route path="/learn/learning_pages/Web2" element={<Web2 />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
