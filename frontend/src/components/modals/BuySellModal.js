@@ -8,6 +8,11 @@ import axios from 'axios';
 
 const BuySellModal = (props) => {
 
+
+  
+
+  
+
   console.log(props.message.data.lastPrice);
   const [open, setOpen] = useState(true);
   const [quantity, setQuantity] = useState(0);
@@ -24,10 +29,10 @@ const BuySellModal = (props) => {
         productType: 'Delivery', // or other product types
         qty: quantity,
         price: props.message.data.lastPrice, // Assuming props.message contains last price
-        userId: 'naBsR0p2vW', // Replace with actual user ID
+        userId: JSON.parse(localStorage.getItem('cmUser')).myuserid,
         stockPrice: props.message.data.lastPrice // Assuming props.message contains last price
       });
-
+  
       if (response.data.success) {
         setBuyMessage(response.data.data.message);
         // You can add further logic here, like updating UI or handling state

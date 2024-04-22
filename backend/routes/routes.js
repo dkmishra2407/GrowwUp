@@ -15,7 +15,7 @@ router.use('/api/scrip', scriptRoutes);
 router.use('/api/watchlist', watchlistRoutes);
 router.use('/api/stock', userStockRoutes);
 router.use('/api/order', orderRoutes);
-router.use('/api/analysis', analysisRoutes)
+router.use('/api/analysis', analysisRoutes);
 router.use('/api/position', positionRoutes);
 router.use('/api/historical', historicalRoutes);
 router.use('/api/market-holidays', holidaysRoutes);

@@ -230,11 +230,11 @@ const User = require("../../models/User"); // Adjust the path based on your proj
         //     });
         // }
 
-        const { stocks: { name, data: { basePrice, change, lastPrice, pChange, open, vwap, upperCP, weekHighLow: { min, max}} } } = req.body;
-
+        const { userId , stocks: { name, data: { basePrice, change, lastPrice, pChange, open, vwap, upperCP, weekHighLow: { min, max}} } } = req.body;
+        console.log(userId);
 try {
     // Check if a stock with the same name already exists
-    const existingStock = await Watchlist.findOne({ name });
+    const existingStock = await Watchlist.findOne({ name: name, userId:userId });
 
     if (existingStock) {
         return res.status(400).json({
@@ -242,10 +242,10 @@ try {
             message: "Stock with this name already exists in the watchlist."
         });
     }
-
+    
     // Create a new stock entry if it doesn't already exist
     const newStock = new Watchlist({
-        userId: "naBsR0p2vW",
+        userId,
         name,
         basePrice,
         change,
@@ -281,11 +281,11 @@ module.exports.get_watchlist_by_userId = async (req, res) => {
    
 
     const { userId, status } = req.query;
-
+    
     try {
         console.log("userId ", userId, status);
         const watching_stocks = await Watchlist.find({ 
-            userId: 'naBsR0p2vW', 
+            userId: userId, 
         });
         console.log("Watchlist ", watching_stocks);
         
@@ -308,11 +308,11 @@ module.exports.get_watchlist_by_userId = async (req, res) => {
 
 module.exports.remove_watchlist_scrip = async (req, res) => {
     try {
-        const { deleting_name } = req.query;
+        const { userId , deleting_name } = req.query;
 
         console.log(deleting_name);
 
-        const existingDoc = await Watchlist.findOne({ name: deleting_name });
+        const existingDoc = await Watchlist.findOne({ userId:userId , name: deleting_name });
         if (!existingDoc) {
             return res.status(404).json({
                 status: 404,
@@ -321,7 +321,7 @@ module.exports.remove_watchlist_scrip = async (req, res) => {
         }
 
         // Delete the document using findOneAndDelete and await the operation
-        await Watchlist.findOneAndDelete({ name: deleting_name });
+        await Watchlist.findOneAndDelete({ userId:userId , name: deleting_name });
 
         return res.status(200).json({
             status: 200,

@@ -3,6 +3,6 @@ const watchlistController = require("../../controllers/watchlist/WatchlistContro
 
 router.post('/add', watchlistController.add_script_in_watchlist);
 router.get('/get?', watchlistController.get_watchlist_by_userId);
-router.delete('/remove?', watchlistController.remove_watchlist_scrip);
+router.delete('/remove', watchlistController.remove_watchlist_scrip);
 
 module.exports = router;

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="./logo.png" alt="logo" height="50"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="./indexhomefinal.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../newspage/indexnews.html">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Calculator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Help</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../learninngpage/index.html">Learn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../authentication/signin/Signin.js">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header>
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+            {
+                "symbols": [
+                    {
+                        "proName": "FOREXCOM:SPXUSD",
+                        "title": "S&P 500 Index"
+                    },
+                    {
+                        "proName": "FOREXCOM:NSXUSD",
+                        "title": "US 100 Cash CFD"
+                    },
+                    {
+                        "proName": "FX_IDC:EURUSD",
+                        "title": "EUR to USD"
+                    },
+                    {
+                        "proName": "BITSTAMP:BTCUSD",
+                        "title": "Bitcoin"
+                    },
+                    {
+                        "proName": "BITSTAMP:ETHUSD",
+                        "title": "Ethereum"
+                    }
+                ],
+                "showSymbolLogo":false,
+                "isTransparent": false,
+                "displayMode": "adaptive",
+                "colorTheme":"dark",
+                "locale":"en"
+            }
+        </script>
+    </div>
+    <!-- TradingView Widget END -->
+</header>
+
+<div class="container">
+    <div class="attractive_content text-center py-5">
+        <h1 class="mb-4">Indian markets at your fingertips.</h1>
+        <p class="mb-4">Long-term or short-term, high risk or low risk. Be the kind of investor you want to be.</p>
+        <a href="../createaccount/index.html" class="btn btn-lg btn-success">Get Started</a>
+    </div>
+
+    <div class="row align-items-center my-5">
+        <div class="col-md-6 text-center text-md-start">
+            <h1 class="mb-3">Paper Trading Platform</h1>
+            <h2 class="mb-3">Master the Art of Trading!</h2>
+            <h3>Experience the Thrill of <span class="text-danger">Live Trading with Zero Risk</span>!</h3>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="./icon.png" alt="#" class="img-fluid">
+        </div>
+    </div>
+
+    <div class="mock_trade_adv my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="mb-3">Why Paper Trading Should Be Your First Step Before You Invest Real</h1>
+                <p class="mb-4">Tempting as it may be to dive headfirst into the exciting world of stock trading, seasoned investors and newbies alike agree: paper trading is your secret weapon for success. Before risking your hard-earned cash, put your skills to the test in a risk-free virtual trading environment. Think of it as a training ground where you can learn, experiment, and build confidence without losing a single penny.</p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="https://neostox.com/images/feature_topimg_1.png" alt="StockAdv" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <div class="review_container my-5">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="review_content p-4">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque et perferendis deserunt nihil explicabo alias suscipit nam repudiandae error vel?</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="review_content p-4">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum vitae tempora ex possimus eligendi ipsam consequatur, rerum at officiis nesciunt.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="review_content p-4">
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi natus odio saepe cum repellendus distinctio eligendi voluptas placeat numquam quae.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="faqs my-5">
+        <h1 class="mb-4 text-center">Frequently Asked Questions</h1>
+        <!-- FAQ content -->
+    </div>
+
+    <div class="edu_content my-5">
+        <h1 class="mb-4 text-center">Educational Content</h1>
+        <!-- Education content -->
+    </div>
+</div>
+
+<footer class="bg-dark text-light py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>About Us</h4>
+                <!-- About Us content -->
+            </div>
+            <div class="col-md-4">
+                <h4>Connect With Us</h4>
+                <!-- Social icons -->
+            </div>
+            <div class="col-md-4">
+                <h4>Contact Us</h4>
+                <!-- Contact information -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+

@@ -5,10 +5,9 @@ module.exports.get_user_orders = async (req, res) => {
     const { userId, status } = req.query;
 
     try {
-        console.log("userId ", userId, status);
+        // console.log("userId ", userId, status);
         const orders = await Order.find({ 
-            userId: 'naBsR0p2vW', 
-            // orderStatus: status.toLowerCase() === 'open' ? ['Pending'] : ['Executed','Rejected']  
+            userId: userId,   
         });
         console.log("orders ", orders);
         

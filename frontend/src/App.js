@@ -20,6 +20,7 @@ import Taxes from "./pages/taxes/Taxes";
 import Web1 from "./learn/learning_pages/Web1";
 import Web2 from "./learn/learning_pages/Web2";
 import MyWatchlist from "./pages/mywatchlist/MyWatchlist"
+import Details from "./pages/dashboard/details/Details";
 function App() {
   return (
     <div className="App">
@@ -38,6 +39,7 @@ function App() {
             <Route path="/watchlist" element={<MyWatchlist />}/>
             <Route path="/learn/learning_pages/Web1" element={<Web1 />} />
             <Route path="/learn/learning_pages/Web2" element={<Web2 />} />
+            <Route path="/dashboard/details/Details" element={<Details />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />

@@ -145,7 +145,7 @@ module.exports.signup_user = async (req, res) => {
         const hashPassword = await bcrypt.hash(password, 10);
 
         // Generate unique user ID
-        const generateId = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 10);
+        const generateId = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 6);
         const userId = generateId();
 
         // Create a new user instance
@@ -196,6 +196,7 @@ module.exports.signup_user = async (req, res) => {
             data: {
                 message: 'Registered successfully',
                 userid: user._id,
+                myuserid:userId,
                 token,
             }
         });
@@ -253,6 +254,7 @@ module.exports.signin_user = async (req, res) => {
             data: {
                 message: 'Login successful',
                 userid: user._id,
+                myuserid:userId,
                 token,
             }
         })

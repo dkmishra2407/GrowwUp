@@ -35,10 +35,10 @@ const OrderModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    orderStatus: {
-        type: String,
-        required: true,
-    },
+    // orderStatus: {
+    //     type: String,
+    //     required: true,
+    // },
     symbol: {
         type: String,
         required: true

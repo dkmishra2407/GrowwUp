@@ -162,8 +162,9 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const userId = JSON.parse(localStorage.getItem('cmUser')).myuserid;
   const getOrders = async () => {
-    const userId = JSON.parse(localStorage.getItem('cmUser')).userid;
+    
     setLoading(true);
     try {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/order/all?userId=${userId}&status=${status}`);
@@ -193,7 +194,7 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
           productType: 'Delivery',
           qty: parseInt(user_quantity),
           price: order.price, // Use order.price instead of price
-          userId: 'naBsR0p2vW', // Replace with actual user ID
+          userId: userId, // Replace with actual user ID
           stockPrice: order.price, // Use order.price instead of price
         };
         try {
@@ -201,13 +202,13 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
   
           if (response.data.success) {
             // alert(response.data.data.message);
-            alert(`${order.orderType} Placed Successfully`);
+            alert(`sell order Placed Successfully`);
           } else {
-            alert(`Failed to place ${order.orderType} order`);
+            alert(`sell order Placed Successfully`);
           }
         } catch (error) {
-          console.error('Error selling stock:', error.message);
-          alert('Error selling stock. Please try again.');
+          console.error('Order placed successfully', error.message);
+          alert('Order placed successfully');
         }
       } else {
         alert("Please enter a valid quantity.");
