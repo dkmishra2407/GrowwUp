@@ -9,7 +9,7 @@ function Account() {
   const [loading, setLoading] = useState(false);
 
   const handleReset = async () => {
-    const userId = JSON.parse(localStorage.getItem('cmUser')).userid;
+    const userId = JSON.parse(localStorage.getItem('cmUser')).myuserid;
       try {
         setLoading(true);
         const response = await axios.patch(`${process.env.REACT_APP_BASE_URL}/user/reset?userId=${userId}`);

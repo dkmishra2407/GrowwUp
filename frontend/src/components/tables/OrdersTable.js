@@ -154,8 +154,8 @@ import axios from 'axios';
 import Loading from '../loading/Loading';
 import { Button } from '@mui/material';
 
-function createData(qty, price, productType, priceType, symbol, orderType, createdAt) {
-  return { qty, price, productType, priceType, symbol, orderType, createdAt };
+function createData(qty, price, productType, priceType, symbol, orderType, createdAt,profit) {
+  return { qty, price, productType, priceType, symbol, orderType, createdAt, profit };
 }
 
 export default function OrdersTable({ status, refresh, setRefresh }) {
@@ -163,6 +163,7 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
   const [loading, setLoading] = useState(false);
 
   const userId = JSON.parse(localStorage.getItem('cmUser')).myuserid;
+
   const getOrders = async () => {
     
     setLoading(true);
@@ -172,7 +173,7 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
         setLoading(false);
         setRefresh(false);
         const allOrders = response.data.orders.map((order) =>
-          createData(order.qty, order.price, order.productType, order.priceType, order.symbol, order.orderType, order.createdAt)
+          createData(order.qty, order.price, order.productType, order.priceType, order.symbol, order.orderType, order.createdAt , order.profit)
         );
         setOrders(allOrders);
       }
@@ -241,6 +242,7 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
             <TableCell align="right">Price Type</TableCell>
             <TableCell align="right">Order Type</TableCell>
             <TableCell align="right">Order Date</TableCell>
+            <TableCell align="right">Profit/Loss(%)</TableCell>
             <TableCell align="right">Action</TableCell>
           </TableRow>
         </TableHead>
@@ -259,6 +261,7 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
                 <TableCell align="right">{order.priceType}</TableCell>
                 <TableCell align="right">{order.orderType}</TableCell>
                 <TableCell align="right">{new Date(order.createdAt).toISOString().substring(0, 10)}</TableCell>
+                <TableCell align="right" style={{ color: order.profit && order.profit.toFixed(2) > 0 ? 'green' : 'red' }}>{order.profit && order.profit.toFixed(2)}</TableCell>
                 <TableCell>
                   <Button onClick={() => handleBuySell(order, order.orderType === 'Sell' ? 'Buy' : 'Sell')} style={{ color: 'white', backgroundColor: '#D43725' }}>
                     {order.orderType === 'Sell' ? 'Buy' : 'Sell'}

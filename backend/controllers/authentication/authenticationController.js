@@ -10,105 +10,6 @@ const nodemailer = require('nodemailer');
 const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const idLength = 6;
 
-// module.exports.signup_user = async (req, res) => {
-//     try {
-
-//         const {
-//             fullName,
-//             mobile,
-//             email,
-//             password
-//         } = req.body;
-
-//         if (!fullName || !email || !password || !mobile) {
-//             return res.status(400).json({
-//                 status: 400,
-//                 message: "Please provide the email address, username, full name, mobile number, and password to register as a new user."
-//             });
-//         }
-
-//         const isEmailexists = await User.findOne({ email });
-//         const isMobileExists = await User.findOne({ mobile });
-
-//         if (isEmailexists) {
-//             return res.status(400).json({
-//                 status: 400,
-//                 message: "A user with this email address already exists, please try again with a different email."
-//             });
-//         }
-
-//         if (isMobileExists) {
-//             return res.status(400).json({
-//                 status: 400,
-//                 message: "A user with this mobile number already exists, please try again with a different mobile number."
-//             });
-//         }
-
-//         let hashPassword = await bcrypt.hash(password, 10);
-
-//         const generateId = customAlphabet(characters, idLength);
-//         const userId = generateId();
-
-//         const user = new User({
-//             userId: userId,
-//             fullName: fullName,
-//             email: email,
-//             mobile: mobile,
-//             password: hashPassword
-//         })
-
-//         await user.save();
-
-//         let token = jwt.sign(
-//             { id: user._id, userId, fullName, email },
-//             process.env.TOKEN_KEY || 'default_secret_key', // Use a default value if TOKEN_KEY is not available
-//         );
-        
-
-//         return res.status(200).json({
-//             success: true,
-//             data: {
-//                 message: 'Registered successfully',
-//                 userid: user._id,
-//                 token,
-//             }
-//         })
-
-// // Create a transporter
-// let transporter = nodemailer.createTransport({
-//   service: 'Gmail',
-//   auth: {
-//     user: 'dkmishra2407@gmail.com',
-//     pass: 'Dkm248577',
-//   },
-// });
-
-// // Define the email content
-// let mailOptions = {
-//   from: 'dkmishra2407@gmail.com',
-//   to: email,
-//   subject: 'hello bhavu',
-//   text: 'JAI YOGESHWAR',
-// };
-
-// // Send the email
-// transporter.sendMail(mailOptions, (error, info) => {
-//   if (error) {
-//     console.log('Error occurred:', error);
-//   } else {
-//     console.log('Email sent:', info.response);
-//   }
-// });
-
-
-//     } catch (e) {
-//         console.log(e);
-//         res.status(500).json({ 
-//             status: 500, 
-//             message: e.message 
-//         });
-//     }
-// }
 
 
 module.exports.signup_user = async (req, res) => {
@@ -165,30 +66,6 @@ module.exports.signup_user = async (req, res) => {
             { id: user._id, userId, fullName, email },
             process.env.TOKEN_KEY || 'default_secret_key'
         );
-
-        // Send email after successful registration
-        const transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                user: "dkmishra2407@gmail.com", // Use environment variables
-                pass: "USER PASSWORD", // Use environment variables
-            },
-        });
-
-        const mailOptions = {
-            from: "dkmishra2407@gmail.com",
-            to: email,
-            subject: 'Welcome to our platform!',
-            text: 'Thank you for registering with us. We look forward to seeing you around!',
-        };
-
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log('Error occurred while sending email:', error);
-            } else {
-                console.log('Email sent:', info.response);
-            }
-        });
 
         // Send success response with token and user ID
         return res.status(200).json({
@@ -286,10 +163,11 @@ module.exports.get_trader_by_userId = async (req, res) => {
 
 module.exports.reset_user_funds = async (req, res) => {
     const { userId } = req.query;
+    console.log(userId)
     try {
         await Order.deleteMany({ userId: userId });
         await Position.deleteMany({ userId: userId });
-        await User.findOneAndUpdate({ _id: userId }, {
+        await User.findOneAndUpdate({ userId: userId }, {
             availableFunds: 100000
         });
 

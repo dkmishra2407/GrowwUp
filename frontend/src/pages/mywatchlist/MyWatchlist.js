@@ -202,8 +202,7 @@ export default function MyWatchlist({ status, refresh, setRefresh }) {
     const deletingName = order.name;
     const userId = JSON.parse(localStorage.getItem('cmUser')).myuserid;
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/stock/remove`,{userId,deletingName});
-
+      const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/stock/remove?userId=${userId}&deletingName=${deletingName}`);
       if (response.status === 200) {
         alert('Deleted From Watchlist');
       } else {

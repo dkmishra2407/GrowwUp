@@ -29,6 +29,7 @@
     "nanoid": "^4.0.2",
     "nanoid-good": "^3.1.0",
     "node-fetch": "^3.3.2",
+    "node-localstorage": "^3.0.5",
     "nodemailer": "^6.9.13",
     "sha256": "^0.2.0",
     "stock-nse-india": "^1.1.2",

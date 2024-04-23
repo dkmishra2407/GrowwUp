@@ -6,11 +6,6 @@ const OrderModel = new mongoose.Schema({
         required: true,
         ref: "User"
     },
-    // scripId: {
-    //     type: String,
-    //     required: true,
-    //     ref: 'Scrip'
-    // },
     qty: {
         type: Number,
         required: true
@@ -19,10 +14,6 @@ const OrderModel = new mongoose.Schema({
         type: Number,
         required: true
     },
-    // isAvgPrice: {
-    //     type: String,
-    //     required: true
-    // },
     orderType: {
         type: String,
         required: true
@@ -35,18 +26,13 @@ const OrderModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    // orderStatus: {
-    //     type: String,
-    //     required: true,
-    // },
     symbol: {
         type: String,
         required: true
+    },
+    profit:{
+        type: Number
     }
-    // isExitOrder: {
-    //     type: String,
-    //     default: false
-    // }
 },{
     timestamps : true
 })

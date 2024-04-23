@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 require('./db/dbconn.js');
-const allScripsKey = require('./scripSymbol.json');
-const Scrip = require('./models/Scrip.js');
 const Order = require('./models/Order.js');
 const Watchlist = require('./models/Watchlist.js');
 const routes = require('./routes/routes.js');
@@ -21,7 +19,7 @@ app.use(cors());
 app.use(routes);
 
 app.get('/', (req, res) => {
-  res.send('Welcome to Stockify APIs');
+  res.send('Welcome to GrowUp APIs');
 });
 
 server.listen(port, () => console.log(`Server is running at ${port}`));
@@ -39,13 +37,12 @@ WebSocketSever.on('connection', function connection(ws, req) {
       client.userId = userId
       if (client == ws && client.readyState === WebSocket.OPEN) {
 
-        const userWatchlist = await Watchlist.find({ userId: client.userId?.userId }).populate("scriptId");
+        const userWatchlist = await Watchlist.find({ userId: client.userId?.userId });
 
         let resp = {
           active: WebSocketSever.clients.size,
           belongs: "connection",
           watchlistSize: userWatchlist.length,
-          scrips: userWatchlist
         }
         client.send(JSON.stringify(resp))
       }

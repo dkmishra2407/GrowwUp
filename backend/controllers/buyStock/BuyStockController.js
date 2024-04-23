@@ -2,6 +2,7 @@ const Order = require("../../models/Order");
 const User = require("../../models/User");
 const Position = require("../../models/Position");
 const mongoose = require("mongoose");
+const Watchlist = require("../../models/Watchlist");
 const axios = require('axios');
 
 
@@ -51,7 +52,7 @@ try{
     
         // Update user funds
         const leverage = 5;
-        const margin = leverage * user.availableFunds;
+        const margin =  user.availableFunds;
         if (margin < avgPrice * qty) {
             await Order.findByIdAndUpdate(savedOrder._id, { orderStatus: 'Rejected' });
             return res.status(400).json({
@@ -60,7 +61,7 @@ try{
             });
         }
     
-        user.availableFunds -= (qty * avgPrice) / leverage;
+        user.availableFunds -= (qty * avgPrice);
         await user.save();
     
         // const newPosition = new Position({
@@ -409,7 +410,7 @@ module.exports.sell_stock = async (req, res) => {
                 message: "Internal server error"
             });
         }
-
+        const totalprofit =(stockData.lastPrice-price)*qty/100
         const newOrder = new Order({
             userId,
             symbol,
@@ -419,6 +420,7 @@ module.exports.sell_stock = async (req, res) => {
             orderType,
             productType,
             priceType,
+            profit: totalprofit
         });
 
         console.log("New Order"+newOrder);
@@ -487,11 +489,13 @@ module.exports.get_positions_by_userId = async (req, res) => {
 
 module.exports.remove_watchlist_scrip = async (req, res) => {
     try {
-        const { userId , deleting_name } = req.query;
+        const { userId , deletingName } = req.query;
 
-        console.log(deleting_name);
+        console.log(deletingName);
 
-        const existingDoc = await Watchlist.findOne({ userId:userId , name: deleting_name });
+        console.log(userId)
+
+        const existingDoc = await Watchlist.findOne({ userId:userId , name: deletingName });
         if (!existingDoc) {
             return res.status(404).json({
                 status: 404,
@@ -500,7 +504,7 @@ module.exports.remove_watchlist_scrip = async (req, res) => {
         }
 
         // Delete the document using findOneAndDelete and await the operation
-        await Watchlist.findOneAndDelete({ userId:userId , name: deleting_name });
+        await Watchlist.findOneAndDelete({ userId:userId , name: deletingName });
 
         return res.status(200).json({
             status: 200,
