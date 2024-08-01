@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, Stack, TextField, Typography, Paper, Grid } from '@mui/material';
 import BuySellModal from '../modals/BuySellModal'; // Import the BuySellModal component
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Watchlist() {
   const [inputStock, setInputStock] = useState('');
@@ -17,13 +19,13 @@ function Watchlist() {
         const userId = JSON.parse(localStorage.getItem('cmUser')).myuserid
         const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/watchlist/add`, {userId , stocks});
         if (response.status === 200) {
-          alert('Added to Watchlist');
+          toast.success('Added to Watchlist');
         } else {
-          alert('Failed to add to Watchlist');
+          toast.error('Failed to add to Watchlist');
         }
       } catch (err) {
         console.error(err);
-        alert('Error adding to Watchlist');
+        toast.error('Error adding to Watchlist');
       }
   };
 
@@ -36,7 +38,7 @@ function Watchlist() {
       }
     } catch (err) {
       console.error(err);
-      alert('Internal server error');
+      toast.error('Internal server error');
     }
   };
 
@@ -169,6 +171,7 @@ function Watchlist() {
       >
         Add To Watchlist
       </Button>
+        <ToastContainer/>
     </Box>
   );
 }

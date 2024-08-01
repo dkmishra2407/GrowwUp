@@ -12,11 +12,10 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 
 
-const pages = ['Dashboard', 'Orders', 'Positions', 'Account', 'Tools','Learn','Taxes','watchlist'];
+const pages = ['Dashboard', 'Orders', 'Positions', 'Account', 'Tools','Learn','Taxes','watchlist','calculator'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -37,7 +36,8 @@ function Header() {
       tools: '/tools',
       learn: '/learn',
       taxes: '/taxes',
-      watchlist: '/watchlist'
+      watchlist: '/watchlist',
+      calculator: '/calculator'
     };
 
     const pagePath = pages[page.toLowerCase()];
@@ -174,6 +174,8 @@ function Header() {
                       color: '#d43725'
                     }
                   }} >Log out</Button>
+{/* 
+                  <Button>{userdata.fund}</Button> */}
               </Box>
             </>
           }

@@ -18,6 +18,7 @@ import TradingChart from "./pages/tradingChart/TradingChart";
 import Learn from "./learn/Learn"; // Update the import path
 import Taxes from "./pages/taxes/Taxes";
 import MyWatchlist from "./pages/mywatchlist/MyWatchlist";
+import Calculator from "./pages/calculator/Calculator";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/learn" element={<Learn />} />
             <Route path="/taxes" element={<Taxes />} />
             <Route path="/watchlist" element={<MyWatchlist />} />
+            <Route path="/calculator" element={<Calculator/>}/>
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />

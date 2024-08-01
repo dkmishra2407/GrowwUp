@@ -1,6 +1,9 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify,make_response
 from flask_cors import CORS
 from jugaad_data.nse import NSELive
+from datetime import date
+from jugaad_data.nse import stock_df
+
 import pandas as pd
 import nselib
 
@@ -41,4 +44,3 @@ def get_stock_data():
 
 if __name__ == '__main__':
     app.run(debug=True, port=8002)
-
