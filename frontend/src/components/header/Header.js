@@ -37,7 +37,7 @@ function Header() {
       learn: '/learn',
       taxes: '/taxes',
       watchlist: '/watchlist',
-      calculator: '/calculator'
+      calculator: '/calculator',
     };
 
     const pagePath = pages[page.toLowerCase()];
@@ -112,7 +112,9 @@ function Header() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="https://dkmishra2407-ml-stock-prediction-model-app-j19syr.streamlit.app/"
+            target="_blank"
+            rel="noopener noreferrer"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -124,8 +126,9 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            GrowUp
+            Predict
           </Typography>
+
           {
             !['/signup', '/signin'].includes(window.location.pathname) &&
             <>
@@ -155,6 +158,7 @@ function Header() {
                 ))}
               </Box>
 
+              
               <Box sx={{ flexGrow: 0 }}>
 
                 <Button

@@ -5,7 +5,6 @@ import {
   Route,
   Routes
 } from "react-router-dom";
-import Home from "./pages/home/Home";
 import Header from "./components/header/Header";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Orders from "./pages/orders/Orders";
@@ -20,14 +19,17 @@ import Taxes from "./pages/taxes/Taxes";
 import MyWatchlist from "./pages/mywatchlist/MyWatchlist";
 import Calculator from "./pages/calculator/Calculator";
 
-
 function App() {
+  const handleButtonClick = () => {
+    window.open('https://growup-stock-market.streamlit.app/', '_blank');
+  };
+
   return (
     <div className="App">
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} >
+          <Route>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/positions" element={<Positions />} />
@@ -43,6 +45,9 @@ function App() {
           <Route path="/signin" element={<Signin />} />
         </Routes>
       </Router>
+      <button className="floating-button" onClick={handleButtonClick}>
+        Click To Predict
+      </button>
     </div>
   );
 }

@@ -3,3 +3,22 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Add this to App.css or the relevant CSS file */
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.floating-button:hover {
+  background-color: #0056b3;
+}
