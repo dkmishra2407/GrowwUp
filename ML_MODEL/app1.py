@@ -2,8 +2,8 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from jugaad_data.nse import NSELive
 import nselib
+import json
 
-# Create NSELive object outside route functions to avoid re-initialization
 n = NSELive()
 
 # Initialize Flask app
@@ -15,10 +15,19 @@ CORS(app, origins="http://localhost:5001")
 def get_market_status():
     try:
         status = n.market_status()
+        print("Raw response from n.market_status():", status)  # Debugging line
+        
+        if not status:  # Check if the response is None or empty
+            return jsonify({'error': 'No data received from market_status()'}), 400
+        
         json_data = status.get('marketState', [])
+        if not json_data:  # Check if 'marketState' exists
+            return jsonify({'error': 'Market state data is not available'}), 400
+
         return jsonify(json_data)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 # Route to get details of all indices
 @app.route('/details', methods=['GET'])

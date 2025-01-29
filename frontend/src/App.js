@@ -5,6 +5,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import { FaRobot } from 'react-icons/fa'; // Import the chatbot icon
 import Header from "./components/header/Header";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Orders from "./pages/orders/Orders";
@@ -23,7 +24,10 @@ function App() {
   const handleButtonClick = () => {
     window.open('https://growup-stock-market.streamlit.app/', '_blank');
   };
-
+  const handleButtonClick1 = () => {
+    window.open('https://chatb-ot.streamlit.app/', '_blank');
+  };
+  
   return (
     <div className="App">
       <Router>
@@ -45,9 +49,16 @@ function App() {
           <Route path="/signin" element={<Signin />} />
         </Routes>
       </Router>
+      <div className="buttons-container">
       <button className="floating-button" onClick={handleButtonClick}>
         Click To Predict
       </button>
+
+      {/* Chatbot icon instead of the button */}
+      <div className="chatbot-icon" onClick={handleButtonClick1}>
+        <FaRobot size={30} color="#fff" />
+      </div>
+      </div>
     </div>
   );
 }
