@@ -19,6 +19,7 @@ import Learn from "./learn/Learn"; // Update the import path
 import Taxes from "./pages/taxes/Taxes";
 import MyWatchlist from "./pages/mywatchlist/MyWatchlist";
 import Calculator from "./pages/calculator/Calculator";
+import home from "./pages/home/home";
 
 function App() {
   const handleButtonClick = () => {
@@ -34,6 +35,7 @@ function App() {
         <Header />
         <Routes>
           <Route>
+            <Route path="/abc" element={<home />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/positions" element={<Positions />} />

@@ -304,8 +304,6 @@ module.exports.get_watchlist_by_userId = async (req, res) => {
 
 }
 
-
-
 module.exports.remove_watchlist_scrip = async (req, res) => {
     try {
         const { userId , deleting_name } = req.query;

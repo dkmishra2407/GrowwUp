@@ -25,7 +25,7 @@ const PositionModel = new mongoose.Schema({
     qty: {
         type: Number,
         required: true
-    },
+    }, 
     posStatus: {
         type: String,
         required: true
